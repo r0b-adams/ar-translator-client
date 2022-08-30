@@ -11,24 +11,9 @@ const Main = () => {
   const [cameraReady, setCameraReady] = useState(false);
   const [cameraType, setCameraType] = useState(CameraType.back);
   const [permission, grantPermission] = Camera.useCameraPermissions();
+
+  // need a ref because methods are bound to the Camera component
   const cam = useRef(null);
-
-  // Camera permissions are still loading
-  if (!permission) {
-    return <View />;
-  }
-
-  // Camera permissions are not granted yet
-  if (!permission.granted) {
-    return (
-      <View style={styles.container}>
-        <Text style={{ textAlign: 'center' }}>
-          We need your permission to show the camera
-        </Text>
-        <Button onPress={grantPermission} title='grant permission' />
-      </View>
-    );
-  }
 
   const toggleCameraType = () => {
     setCameraType((type) =>
@@ -51,6 +36,23 @@ const Main = () => {
     }
   };
 
+  // camera permissions are still loading
+  if (!permission) {
+    return <View />;
+  }
+
+  // camera permissions are not granted yet
+  if (!permission.granted) {
+    return (
+      <View style={styles.container}>
+        <Text style={{ textAlign: 'center' }}>
+          We need your permission to show the camera
+        </Text>
+        <Button onPress={grantPermission} title='grant permission' />
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <Camera
@@ -62,15 +64,24 @@ const Main = () => {
         onMountError={() => console.log('CAMERA MOUNT ERROR')}
       >
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
-            <Text style={styles.text}>Flip Camera</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={analyze}>
-            <Text style={styles.text}>Take Photo</Text>
-          </TouchableOpacity>
+          <Buttons />
         </View>
       </Camera>
     </View>
+  );
+};
+
+const Buttons = () => {
+  return (
+    <>
+      <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
+        <Text style={styles.text}>Flip Camera</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.button} onPress={analyze}>
+        <Text style={styles.text}>Take Photo</Text>
+      </TouchableOpacity>
+    </>
   );
 };
 
