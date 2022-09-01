@@ -2,7 +2,7 @@ import axios from 'axios';
 
 process.env.NODE_ENV === 'development'
   ? (axios.defaults.baseURL = 'http://10.0.0.98:3000')
-  : (axios.defaults.baseURL = ''); // deployment
+  : (axios.defaults.baseURL = ''); // production
 
 axios.defaults.validateStatus = (status) => status < 500;
 
