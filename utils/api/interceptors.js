@@ -1,13 +1,18 @@
-// DEVELOPMENT ONLY
-import { BASE_URL, TOKEN } from '@env';
+import { getItemAsync } from 'expo-secure-store';
+
+import { TOKEN_KEY } from '../constants';
+
+// request interceptors
 
 const setAuth = (config) => {
-  if (TOKEN) config.headers = { authorization: `Bearer ${TOKEN}` };
+  const token = getItemAsync(TOKEN_KEY);
+  if (token) config.headers = { authorization: `Bearer ${token}` };
   return config;
 };
 
 const setHost = (config) => {
-  config.baseURL = BASE_URL;
+  // DEVELOPMENT
+  config.baseURL = 'http://10.0.0.98:3000';
   return config;
 };
 
