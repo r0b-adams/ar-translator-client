@@ -1,0 +1,1 @@
+export const TOKEN_KEY = 'AR_TRANSLATOR_TOKEN';
