@@ -64,14 +64,14 @@ const Main = () => {
         onMountError={() => console.log('CAMERA MOUNT ERROR')}
       >
         <View style={styles.buttonContainer}>
-          <Buttons />
+          <Buttons toggleCameraType={toggleCameraType} analyze={analyze} />
         </View>
       </Camera>
     </View>
   );
 };
 
-const Buttons = () => {
+const Buttons = ({ analyze, toggleCameraType }) => {
   return (
     <>
       <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
