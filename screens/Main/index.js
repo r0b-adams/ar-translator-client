@@ -22,7 +22,6 @@ const Main = () => {
 
   const analyze = async () => {
     try {
-      console.log(ready);
       if (!ready.current) {
         throw new Error('Failed to take photo; Camera not mounted');
       }
