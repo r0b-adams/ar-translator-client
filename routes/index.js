@@ -1,11 +1,12 @@
 import { useContext } from 'react';
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import AppRoutes from './AppRoutes';
 import AppContext from '../store/context';
 
-import { LoginScreen, RegisterScreen } from '../screens';
+import { LoginScreen, RegisterScreen, Languages } from '../screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,11 +17,18 @@ const Routes = () => {
     <NavigationContainer>
       <Stack.Navigator>
         {state.user ? (
-          <Stack.Screen
-            name='Translator'
-            component={AppRoutes}
-            options={{ headerShown: false }}
-          />
+          <>
+            <Stack.Group>
+              <Stack.Screen
+                name='Translator'
+                component={AppRoutes}
+                options={{ headerShown: false }}
+              />
+            </Stack.Group>
+            <Stack.Group screenOptions={{ presentaion: 'modal' }}>
+              <Stack.Screen name='Languages' component={Languages} />
+            </Stack.Group>
+          </>
         ) : (
           <>
             <Stack.Screen name='Login' component={LoginScreen} />
