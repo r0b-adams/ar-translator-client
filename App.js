@@ -4,7 +4,7 @@ import Routes from './routes';
 import { SplashScreen } from './screens';
 import { useReducerWithThunks } from './hooks';
 import reducer, { initialState } from './store/reducer';
-import { getUser } from './store/thunks';
+import { getLanguages, getUser } from './store/thunks';
 import AppContext from './store/context';
 import { restoreToken } from './utils/helpers';
 
@@ -14,6 +14,11 @@ const App = () => {
   useEffect(() => {
     restoreToken().then(() => dispatch(getUser()));
   }, []);
+
+  // get list of supported languages on successful login
+  useEffect(() => {
+    if (state.user) dispatch(getLanguages());
+  }, [state.user]);
 
   if (state.loading) {
     return <SplashScreen />;
