@@ -2,7 +2,7 @@ import api from '../utils/api';
 
 import { setItemAsync, deleteItemAsync } from 'expo-secure-store';
 
-import { setLoading, setUser } from './actions';
+import { setLoading, setUser, setLanguages } from './actions';
 
 import { TOKEN_KEY } from '../utils/helpers';
 
@@ -11,8 +11,8 @@ export const getUser = () => async (dispatch) => {
     dispatch(setLoading(true));
     const { data } = await api.getUser();
     if (data.profile) dispatch(setUser(data.profile));
-  } catch (err) {
-    console.error(err.message);
+  } catch (error) {
+    console.error(error.message);
     dispatch(setUser(null));
     await deleteItemAsync(TOKEN_KEY);
   } finally {
@@ -36,8 +36,8 @@ export const register = (credentials) => async (dispatch) => {
     if (data.profile) {
       dispatch(setUser(data.profile));
     }
-  } catch (err) {
-    console.error(err.message);
+  } catch (error) {
+    console.error(error.message);
     dispatch(setUser(null));
     await deleteItemAsync(TOKEN_KEY);
   } finally {
@@ -49,8 +49,6 @@ export const login = (credentials) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
     const { data } = await api.login(credentials);
-
-    console.log('LOGIN RESPONSE: ', data);
 
     if (data.error) {
       console.error(data.error);
@@ -64,8 +62,8 @@ export const login = (credentials) => async (dispatch) => {
     if (data.profile) {
       dispatch(setUser(data.profile));
     }
-  } catch (err) {
-    console.error(err.message);
+  } catch (error) {
+    console.error(error.message);
     dispatch(setUser(null));
     await deleteItemAsync(TOKEN_KEY);
   } finally {
@@ -76,10 +74,19 @@ export const login = (credentials) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   try {
     await api.logout();
-  } catch (err) {
-    console.error(err.message);
+  } catch (error) {
+    console.error(error.message);
   } finally {
     dispatch(setUser(null));
     await deleteItemAsync(TOKEN_KEY);
+  }
+};
+
+export const getLanguages = () => async (dispatch) => {
+  try {
+    const { data } = await api.getLanguages();
+    if (data) dispatch(setLanguages(data));
+  } catch (error) {
+    console.error(error.message);
   }
 };

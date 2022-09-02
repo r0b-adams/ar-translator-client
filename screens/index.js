@@ -4,6 +4,7 @@ import MainScreen from './Main';
 import RegisterScreen from './Register';
 import SettingsScreen from './Settings';
 import SplashScreen from './Spash';
+import Languages from './Languages';
 
 export {
   HomeScreen,
@@ -12,4 +13,5 @@ export {
   RegisterScreen,
   SettingsScreen,
   SplashScreen,
+  Languages,
 };

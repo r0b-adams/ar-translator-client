@@ -1,27 +1,38 @@
 // actions
 
-const ACTIONS = {
+export const ACTIONS = {
   SET_LOADING: 'SET_LOADING',
   SET_USER: 'SET_USER',
+  SET_LANUAGES: 'SET_LANUAGES',
+  SET_SELECTED_LANGUAGE: 'SET_SELECTED_LANGUAGE',
 };
 
 // action creators
 
-const setLoading = (status) => {
-  console.log('SET LOADING: ', status);
+export const setLoading = (status) => {
   return {
     type: ACTIONS.SET_LOADING,
     payload: status,
   };
 };
 
-const setUser = (user) => {
-  console.log('SET USER: ', user);
+export const setUser = (user) => {
   return {
     type: ACTIONS.SET_USER,
     payload: user,
   };
 };
 
-export { setLoading, setUser };
-export default ACTIONS;
+export const setLanguages = (languages) => {
+  return {
+    type: ACTIONS.SET_LANUAGES,
+    payload: languages,
+  };
+};
+
+export const setSelectedlanguage = (language) => {
+  return {
+    type: ACTIONS.SET_SELECTED_LANGUAGE,
+    payload: language,
+  };
+};

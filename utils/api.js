@@ -29,6 +29,10 @@ const api = {
     return axios.delete('/auth/logout');
   },
 
+  getLanguages: async () => {
+    return axios.get('/translateAPI/languages');
+  },
+
   analyze: async (img, to) => {
     return axios.post('/visionAPI/objects', { img, to });
   },

@@ -1,12 +1,14 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 import { Button, Text, TouchableOpacity, View } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import { Camera, CameraType } from 'expo-camera';
 
 import api from '../../utils/api';
+import AppContext from '../../store/context';
 import styles from './styles';
 
-const Main = () => {
+const Main = ({ navigation }) => {
+  const [state] = useContext(AppContext);
   const isFocused = useIsFocused();
   const [cameraType, setCameraType] = useState(CameraType.back);
   const [permission, grantPermission] = Camera.useCameraPermissions();
@@ -28,7 +30,7 @@ const Main = () => {
       }
 
       const { base64 } = await cam.current.takePictureAsync({ base64: true });
-      const { data } = await api.analyze(base64, 'en');
+      const { data } = await api.analyze(base64, state.selectedLanguage.code);
 
       console.log(data);
     } catch (error) {
@@ -71,6 +73,13 @@ const Main = () => {
 
             <TouchableOpacity style={styles.button} onPress={analyze}>
               <Text style={styles.text}>Take Photo</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate('Languages')}
+            >
+              <Text style={styles.text}>{state.selectedLanguage.name}</Text>
             </TouchableOpacity>
           </View>
         </Camera>
