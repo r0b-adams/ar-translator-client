@@ -4,7 +4,9 @@ process.env.NODE_ENV === 'development'
   ? (axios.defaults.baseURL = 'http://10.0.0.98:3000')
   : (axios.defaults.baseURL = ''); // production
 
-axios.defaults.validateStatus = (status) => status < 500;
+// suppress errs thrown by axios due to res codes
+// so we can use the server respose messages
+axios.defaults.validateStatus = (status) => status <= 500;
 
 const api = {
   setAuthHeader: (token) => {
@@ -25,6 +27,10 @@ const api = {
 
   logout: async () => {
     return axios.delete('/auth/logout');
+  },
+
+  analyze: async (img, to) => {
+    return axios.post('/visionAPI/objects', { img, to });
   },
 };
 

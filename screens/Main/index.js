@@ -3,6 +3,7 @@ import { Button, Text, TouchableOpacity, View } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import { Camera, CameraType } from 'expo-camera';
 
+import api from '../../utils/api';
 import styles from './styles';
 
 const Main = () => {
@@ -26,11 +27,10 @@ const Main = () => {
         throw new Error('Failed to take photo; Camera not mounted');
       }
 
-      // const { base64 } = await cam.current.takePictureAsync({ base64: true });
-      // const { data } = await api.analyze(base64, LANG_TO);
+      const { base64 } = await cam.current.takePictureAsync({ base64: true });
+      const { data } = await api.analyze(base64, 'en');
 
-      // console.log(data);
-      console.log('TAKE PHOTO');
+      console.log(data);
     } catch (error) {
       console.error(error.message);
     }
