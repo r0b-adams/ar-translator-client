@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { View, TextInput, Button } from 'react-native';
+import { View, TouchableOpacity, Text, TextInput, Button } from 'react-native';
 
 import AppContext from '../../store/context';
 import { login } from '../../store/thunks';
@@ -17,24 +17,33 @@ const Login = ({ navigation }) => {
   };
 
   return (
-    <View>
-      <TextInput
-        placeholder='username'
-        value={username}
-        onChangeText={setUsername}
-      />
-      <TextInput
-        placeholder='password'
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      <Button title='Login' onPress={submit} />
-
-      <Button
-        title='Register'
+    <View style={styles.screen}>
+      <View style={styles.form}>
+        <View>
+          <TextInput
+            style={styles.input}
+            placeholder='enter a username...'
+            value={username}
+            onChangeText={setUsername}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder='enter a password...'
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+          />
+          <Button title='Login' color='#108CC6' onPress={submit} />
+        </View>
+      </View>
+      <TouchableOpacity
+        style={styles.register}
         onPress={() => navigation.navigate('Register')}
-      />
+      >
+        <Text>
+          No account? <Text style={styles.link}>Register</Text>
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
