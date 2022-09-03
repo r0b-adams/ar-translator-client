@@ -15,7 +15,11 @@ const Routes = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerTitleAlign: 'center',
+        }}
+      >
         {state.user ? (
           <>
             <Stack.Group>
