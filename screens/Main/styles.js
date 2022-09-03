@@ -9,16 +9,17 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   buttonContainer: {
-    flex: 1,
+    paddingVertical: 10,
+    opacity: 0.9,
+    position: 'absolute',
+    bottom: 0,
     flexDirection: 'row',
     alignItems: 'center',
-    bottom: 10,
-    backgroundColor: 'transparent',
-    position: 'absolute',
+    justifyContent: 'center',
+    backgroundColor: 'gray',
   },
   button: {
     flex: 1,
-    alignSelf: 'flex-end',
     alignItems: 'center',
   },
   text: {

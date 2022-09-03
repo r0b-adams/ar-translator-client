@@ -15,13 +15,16 @@ const Languages = ({ navigation }) => {
   };
 
   return (
-    <View>
+    <View style={styles.screen}>
       <FlatList
         data={state.languages}
         keyExtractor={(item) => item.code}
         renderItem={({ item }) => {
           return (
-            <TouchableOpacity onPress={() => selectLanguage(item)}>
+            <TouchableOpacity
+              style={styles.language}
+              onPress={() => selectLanguage(item)}
+            >
               <Text>{item.name}</Text>
             </TouchableOpacity>
           );

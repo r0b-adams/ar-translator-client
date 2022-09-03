@@ -18,22 +18,31 @@ const Register = () => {
   };
 
   return (
-    <View>
-      <TextInput
-        placeholder='username'
-        value={username}
-        onChangeText={setUsername}
-      />
+    <View style={styles.screen}>
+      <View style={styles.form}>
+        <TextInput
+          style={styles.input}
+          placeholder='enter a username...'
+          value={username}
+          onChangeText={setUsername}
+        />
 
-      <TextInput placeholder='email' value={email} onChangeText={setEmail} />
+        <TextInput
+          style={styles.input}
+          placeholder='enter an email...'
+          value={email}
+          onChangeText={setEmail}
+        />
 
-      <TextInput
-        placeholder='password'
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      <Button title='Register' onPress={submit} />
+        <TextInput
+          style={styles.input}
+          placeholder='enter a password...'
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+        />
+        <Button title='Register' color='#108CC6' onPress={submit} />
+      </View>
     </View>
   );
 };
