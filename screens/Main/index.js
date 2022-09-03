@@ -2,7 +2,8 @@ import { useState, useRef, useContext } from 'react';
 import { Button, Text, TouchableOpacity, View } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import { Camera, CameraType } from 'expo-camera';
-
+import { MaterialIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import api from '../../utils/api';
 import AppContext from '../../store/context';
 import styles from './styles';
@@ -68,11 +69,11 @@ const Main = ({ navigation }) => {
         >
           <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
-              <Text style={styles.text}>Flip Camera</Text>
+              <Ionicons name='camera-reverse' size={36} color='white' />
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.button} onPress={analyze}>
-              <Text style={styles.text}>Take Photo</Text>
+              <MaterialIcons name='camera' size={48} color='white' />
             </TouchableOpacity>
 
             <TouchableOpacity
