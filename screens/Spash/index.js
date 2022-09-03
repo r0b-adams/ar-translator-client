@@ -1,11 +1,11 @@
-import { View, Text } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 
 import styles from './styles';
 
-const Splash = ({ navigation }) => {
+const Splash = () => {
   return (
     <View style={styles.screen}>
-      <Text>Splash</Text>
+      <ActivityIndicator />
     </View>
   );
 };
