@@ -5,7 +5,7 @@ process.env.NODE_ENV === 'development'
   : (axios.defaults.baseURL = ''); // production
 
 // suppress errs thrown by axios due to res codes
-// so we can use the server respose messages
+// so we can use the server response messages
 axios.defaults.validateStatus = (status) => status <= 500;
 
 const api = {
