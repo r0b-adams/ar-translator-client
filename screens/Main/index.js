@@ -4,6 +4,7 @@ import { Camera, CameraType } from 'expo-camera';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { useIsFocused } from '@react-navigation/native';
 
+import Splash from '../Spash';
 import api from '../../utils/api';
 import AppContext from '../../store/context';
 
@@ -30,10 +31,8 @@ const Main = ({ navigation }) => {
       if (!ready.current) {
         throw new Error('Failed to take photo; Camera not mounted');
       }
-
       const { base64 } = await cam.current.takePictureAsync({ base64: true });
       const { data } = await api.analyze(base64, state.selectedLanguage.code);
-
       console.log(data);
     } catch (error) {
       console.error(error.message);
@@ -42,7 +41,7 @@ const Main = ({ navigation }) => {
 
   // camera permissions are still loading
   if (!permission) {
-    return <View />;
+    return <Splash />;
   }
 
   // camera permissions are not granted yet
