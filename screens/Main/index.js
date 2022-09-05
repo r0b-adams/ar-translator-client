@@ -21,9 +21,11 @@ const Main = ({ navigation }) => {
   const ready = useRef(false);
 
   const toggleCameraType = () => {
-    setCameraType((type) =>
-      type === CameraType.back ? CameraType.front : CameraType.back
-    );
+    if (ready.current) {
+      setCameraType((type) =>
+        type === CameraType.back ? CameraType.front : CameraType.back
+      );
+    }
   };
 
   const analyze = async () => {
