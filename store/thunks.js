@@ -8,7 +8,9 @@ export const getUser = () => async (dispatch) => {
   try {
     dispatch(setLoading(true));
     const { data } = await api.getUser();
-    if (data.profile) dispatch(setUser(data.profile));
+    if (data.profile) {
+      dispatch(setUser(data.profile));
+    }
   } catch (error) {
     console.error(error.message);
     dispatch(setUser(null));
