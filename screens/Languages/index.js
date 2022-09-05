@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { View, Text, TouchableOpacity, FlatList } from 'react-native';
-import AppContext from '../../store/context';
 
+import AppContext from '../../store/context';
 import { setSelectedlanguage } from '../../store/actions';
 
 import styles from './styles';
