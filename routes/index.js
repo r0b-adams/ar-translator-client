@@ -27,9 +27,12 @@ const Routes = () => {
                 options={{ headerShown: false }}
               />
             </Stack.Group>
-            <Stack.Group screenOptions={{ presentaion: 'modal' }}>
-              <Stack.Screen name='Languages' component={Languages} />
-            </Stack.Group>
+
+            {state.languages && (
+              <Stack.Group screenOptions={{ presentaion: 'modal' }}>
+                <Stack.Screen name='Languages' component={Languages} />
+              </Stack.Group>
+            )}
           </>
         ) : (
           <>
