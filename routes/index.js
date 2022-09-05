@@ -1,12 +1,10 @@
 import { useContext } from 'react';
-
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import { LoginScreen, RegisterScreen, Languages } from '../screens';
 import AppRoutes from './AppRoutes';
 import AppContext from '../store/context';
-
-import { LoginScreen, RegisterScreen, Languages } from '../screens';
 
 const Stack = createNativeStackNavigator();
 
