@@ -26,6 +26,7 @@ const Login = ({ navigation }) => {
             value={username}
             onChangeText={setUsername}
           />
+
           <TextInput
             style={styles.input}
             placeholder='enter a password...'
@@ -33,9 +34,11 @@ const Login = ({ navigation }) => {
             onChangeText={setPassword}
             secureTextEntry
           />
+
           <Button title='Login' color='#108CC6' onPress={submit} />
         </View>
       </View>
+
       <TouchableOpacity
         style={styles.register}
         onPress={() => navigation.navigate('Register')}

@@ -1,4 +1,5 @@
 import { getItemAsync } from 'expo-secure-store';
+
 import api from './api';
 
 export const TOKEN_KEY = 'AR_TRANSLATOR_TOKEN';
