@@ -1,16 +1,17 @@
 import { useState, useRef, useContext } from 'react';
 import { Button, Text, TouchableOpacity, View } from 'react-native';
-import { useIsFocused } from '@react-navigation/native';
 import { Camera, CameraType } from 'expo-camera';
-import { MaterialIcons } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
+import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { useIsFocused } from '@react-navigation/native';
+
 import api from '../../utils/api';
 import AppContext from '../../store/context';
+
 import styles from './styles';
 
 const Main = ({ navigation }) => {
-  const [state] = useContext(AppContext);
   const isFocused = useIsFocused();
+  const [state] = useContext(AppContext);
   const [cameraType, setCameraType] = useState(CameraType.back);
   const [permission, grantPermission] = Camera.useCameraPermissions();
 
@@ -48,7 +49,7 @@ const Main = ({ navigation }) => {
   if (!permission.granted) {
     return (
       <View style={styles.container}>
-        <Text style={{ textAlign: 'center' }}>
+        <Text style={{ textAlign: 'center', marginBottom: 10 }}>
           We need your permission to show the camera
         </Text>
         <Button onPress={grantPermission} title='grant permission' />
