@@ -4,19 +4,27 @@ import { View, TouchableOpacity, Text, TextInput, Button } from 'react-native';
 import AppContext from '../../store/context';
 import { login } from '../../store/thunks';
 
+import Splash from '../Spash';
 import styles from './styles';
 
 const Login = ({ navigation }) => {
-  const [, dispatch] = useContext(AppContext);
-
+  const [state, dispatch] = useContext(AppContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const clearInputs = () => {
+    setUsername(() => '');
+    setPassword(() => '');
+  };
+
   const submit = () => {
+    clearInputs();
     dispatch(login({ username, password }));
   };
 
-  return (
+  return state.fetching ? (
+    <Splash />
+  ) : (
     <View style={styles.screen}>
       <View style={styles.form}>
         <View>
