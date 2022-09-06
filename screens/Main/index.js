@@ -2,16 +2,14 @@ import { useState, useRef, useContext } from 'react';
 import { Button, Text, TouchableOpacity, View } from 'react-native';
 import { Camera, CameraType } from 'expo-camera';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
-import { useIsFocused } from '@react-navigation/native';
 
-import Splash from '../Spash';
 import api from '../../utils/api';
 import AppContext from '../../store/context';
 
 import styles from './styles';
 
 const Main = ({ navigation }) => {
-  const isFocused = useIsFocused();
+  const isFocused = navigation.isFocused();
   const [state] = useContext(AppContext);
   const [cameraType, setCameraType] = useState(CameraType.back);
   const [permission, grantPermission] = Camera.useCameraPermissions();
@@ -43,7 +41,7 @@ const Main = ({ navigation }) => {
 
   // camera permissions are still loading
   if (!permission) {
-    return <Splash />;
+    return <View />;
   }
 
   // camera permissions are not granted yet
@@ -67,8 +65,22 @@ const Main = ({ navigation }) => {
           type={cameraType}
           ratio='16:9'
           onCameraReady={() => (ready.current = true)}
-          onMountError={() => console.log('CAMERA MOUNT ERROR')}
+          onMountError={() => console.error('CAMERA MOUNT ERROR')}
         >
+          <TouchableOpacity
+            style={{ position: 'absolute', top: 0, left: 0, margin: 20 }}
+            onPress={() => navigation.navigate('Home')}
+          >
+            <Text style={{ color: 'white', fontSize: 22 }}>{'< Home'}</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={{ position: 'absolute', top: 0, right: 0, margin: 20 }}
+            onPress={() => navigation.navigate('Settings')}
+          >
+            <Text style={{ color: 'white', fontSize: 22 }}>{'Settings >'}</Text>
+          </TouchableOpacity>
+
           <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
               <Ionicons name='camera-reverse' size={36} color='white' />
