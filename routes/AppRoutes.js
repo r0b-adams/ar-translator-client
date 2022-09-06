@@ -22,6 +22,7 @@ const AppRoutes = () => {
         options={{
           headerShown: false,
           tabBarIcon: CameraIcon,
+          tabBarStyle: { display: 'none' },
         }}
       />
 
