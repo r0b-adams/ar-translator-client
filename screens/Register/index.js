@@ -4,20 +4,29 @@ import { View, TextInput, Button } from 'react-native';
 import AppContext from '../../store/context';
 import { register } from '../../store/thunks';
 
+import Splash from '../Spash';
 import styles from './styles';
 
 const Register = () => {
-  const [, dispatch] = useContext(AppContext);
-
+  const [state, dispatch] = useContext(AppContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
+  const clearInputs = () => {
+    setUsername(() => '');
+    setPassword(() => '');
+    setEmail(() => '');
+  };
+
   const submit = () => {
+    clearInputs();
     dispatch(register({ username, email, password }));
   };
 
-  return (
+  return state.fetching ? (
+    <Splash />
+  ) : (
     <View style={styles.screen}>
       <View style={styles.form}>
         <TextInput
