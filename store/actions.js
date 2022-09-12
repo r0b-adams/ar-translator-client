@@ -1,4 +1,4 @@
-// actions
+// action types
 
 export const ACTIONS = {
   SET_INIT: 'SET_INIT',
