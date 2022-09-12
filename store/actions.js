@@ -6,6 +6,7 @@ export const ACTIONS = {
   SET_USER: 'SET_USER',
   SET_LANGUAGES: 'SET_LANGUAGES',
   SET_SELECTED_LANGUAGE: 'SET_SELECTED_LANGUAGE',
+  SET_DATA_URI: 'SET_DATA_URI',
 };
 
 // action creators
@@ -47,5 +48,13 @@ export const setSelectedlanguage = (language) => {
   return {
     type: ACTIONS.SET_SELECTED_LANGUAGE,
     payload: language,
+  };
+};
+
+export const setDataUri = (dataURI) => {
+  console.log(ACTIONS.SET_DATA_URI, dataURI);
+  return {
+    type: ACTIONS.SET_DATA_URI,
+    payload: dataURI,
   };
 };
