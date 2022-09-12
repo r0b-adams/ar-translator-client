@@ -6,6 +6,7 @@ export const initialState = {
   user: null,
   languages: null,
   selectedLanguage: { code: 'en', name: 'English' },
+  dataUri: '',
 };
 
 const reducer = (state, action) => {
@@ -24,6 +25,9 @@ const reducer = (state, action) => {
 
     case ACTIONS.SET_SELECTED_LANGUAGE:
       return { ...state, selectedLanguage: action.payload };
+
+    case ACTIONS.SET_DATA_URI:
+      return { ...state, dataUri: payload };
 
     default:
       return state;
