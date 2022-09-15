@@ -7,6 +7,7 @@ import {
   LoginScreen,
   RegisterScreen,
   Languages,
+  Localizer,
 } from '../screens';
 import AppRoutes from './AppRoutes';
 import AppContext from '../store/context';
@@ -39,10 +40,17 @@ const Routes = () => {
             {state.languages && (
               <Stack.Screen
                 name='Languages'
-                options={{ presentation: 'modal' }}
                 component={Languages}
+                options={{ presentation: 'modal' }}
               />
             )}
+            <Stack.Screen
+              name='Localizer'
+              component={Localizer}
+              options={{
+                headerShown: false,
+              }}
+            />
           </>
         ) : (
           <>
