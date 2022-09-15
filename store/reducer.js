@@ -26,8 +26,8 @@ const reducer = (state, action) => {
     case ACTIONS.SET_SELECTED_LANGUAGE:
       return { ...state, selectedLanguage: action.payload };
 
-    case ACTIONS.SET_LAST_IMAGE_B64:
-      return { ...state, lastImageB64: payload };
+    case ACTIONS.SET_IMAGE_DATA:
+      return { ...state, lastImageB64: action.payload };
 
     default:
       return state;
