@@ -1,4 +1,4 @@
-// actions
+// action types
 
 export const ACTIONS = {
   SET_INIT: 'SET_INIT',
@@ -6,6 +6,7 @@ export const ACTIONS = {
   SET_USER: 'SET_USER',
   SET_LANGUAGES: 'SET_LANGUAGES',
   SET_SELECTED_LANGUAGE: 'SET_SELECTED_LANGUAGE',
+  SET_IMAGE_DATA: 'SET_IMAGE_DATA',
 };
 
 // action creators
@@ -47,5 +48,13 @@ export const setSelectedlanguage = (language) => {
   return {
     type: ACTIONS.SET_SELECTED_LANGUAGE,
     payload: language,
+  };
+};
+
+export const setImgData = (b64) => {
+  console.log(ACTIONS.SET_IMAGE_DATA);
+  return {
+    type: ACTIONS.SET_IMAGE_DATA,
+    payload: b64,
   };
 };

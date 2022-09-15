@@ -6,6 +6,7 @@ export const initialState = {
   user: null,
   languages: null,
   selectedLanguage: { code: 'en', name: 'English' },
+  lastImageB64: '',
 };
 
 const reducer = (state, action) => {
@@ -24,6 +25,9 @@ const reducer = (state, action) => {
 
     case ACTIONS.SET_SELECTED_LANGUAGE:
       return { ...state, selectedLanguage: action.payload };
+
+    case ACTIONS.SET_IMAGE_DATA:
+      return { ...state, lastImageB64: action.payload };
 
     default:
       return state;

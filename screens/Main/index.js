@@ -1,41 +1,34 @@
-import { useState, useRef, useContext } from 'react';
+import { useRef, useContext } from 'react';
 import { Button, Text, TouchableOpacity, View } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 import { Camera, CameraType } from 'expo-camera';
-import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
 
-import api from '../../utils/api';
+import { setImgData } from '../../store/actions';
 import AppContext from '../../store/context';
 
 import styles from './styles';
 
 const Main = ({ navigation }) => {
-  const isFocused = navigation.isFocused();
-  const [state] = useContext(AppContext);
-  const [cameraType, setCameraType] = useState(CameraType.back);
+  const isFocused = useIsFocused();
+  const [state, dispatch] = useContext(AppContext);
   const [permission, grantPermission] = Camera.useCameraPermissions();
 
   // need a ref because methods are bound to the Camera component
   const cam = useRef(null);
   const ready = useRef(false);
 
-  const toggleCameraType = () => {
-    if (ready.current) {
-      setCameraType((type) =>
-        type === CameraType.back ? CameraType.front : CameraType.back
-      );
-    }
-  };
-
   const analyze = async () => {
     try {
-      if (!ready.current) {
-        throw new Error('Failed to take photo; Camera not mounted');
-      }
-      const { base64 } = await cam.current.takePictureAsync({ base64: true });
-      const { data } = await api.analyze(base64, state.selectedLanguage.code);
-      console.log(data);
+      if (!ready.current) throw new Error('camera not mounted');
+      const { uri, base64 } = await cam.current.takePictureAsync({
+        base64: true,
+      });
+      dispatch(setImgData(base64));
+      navigation.navigate('Localizer', { uri });
     } catch (error) {
       console.error(error.message);
+      navigation.navigate('Home');
     }
   };
 
@@ -62,32 +55,21 @@ const Main = ({ navigation }) => {
         <Camera
           ref={cam}
           style={styles.camera}
-          type={cameraType}
+          type={CameraType.back}
           ratio='16:9'
           onCameraReady={() => (ready.current = true)}
           onMountError={() => console.error('CAMERA MOUNT ERROR')}
         >
-          <TouchableOpacity
-            style={{ position: 'absolute', top: 0, left: 0, margin: 20 }}
-            onPress={() => navigation.navigate('Home')}
-          >
-            <Text style={{ color: 'white', fontSize: 22 }}>{'< Home'}</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={{ position: 'absolute', top: 0, right: 0, margin: 20 }}
-            onPress={() => navigation.navigate('Settings')}
-          >
-            <Text style={{ color: 'white', fontSize: 22 }}>{'Settings >'}</Text>
-          </TouchableOpacity>
-
           <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
-              <Ionicons name='camera-reverse' size={36} color='white' />
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate('Home')}
+            >
+              <FontAwesome name='home' size={36} color='#fff' />
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.button} onPress={analyze}>
-              <MaterialIcons name='camera' size={48} color='white' />
+              <MaterialIcons name='camera' size={48} color='#fff' />
             </TouchableOpacity>
 
             <TouchableOpacity
