@@ -6,7 +6,7 @@ export const ACTIONS = {
   SET_USER: 'SET_USER',
   SET_LANGUAGES: 'SET_LANGUAGES',
   SET_SELECTED_LANGUAGE: 'SET_SELECTED_LANGUAGE',
-  SET_LAST_IMAGE_B64: 'SET_LAST_IMAGE_B64',
+  SET_IMAGE_DATA: 'SET_IMAGE_DATA',
 };
 
 // action creators
@@ -51,10 +51,10 @@ export const setSelectedlanguage = (language) => {
   };
 };
 
-export const setLastImageB64 = (base64) => {
-  console.log(ACTIONS.SET_LAST_IMAGE_B64, base64);
+export const setImgData = (b64) => {
+  console.log(ACTIONS.SET_IMAGE_DATA);
   return {
-    type: ACTIONS.SET_LAST_IMAGE_B64,
-    payload: base64,
+    type: ACTIONS.SET_IMAGE_DATA,
+    payload: b64,
   };
 };
